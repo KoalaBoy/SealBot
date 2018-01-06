@@ -629,6 +629,26 @@ def bot(op):
                     ki5.updateProfile(profile)
                     ki5.sendText(msg.to,"เปลี่ยนชื่อเป็น (๑و•̀ω•́)و\n" + string + "")
 #--------------------------------------------------------
+            elif "Ct @" in msg.text:            
+                print "[Command]dp executing"
+                _name = msg.text.replace("Ct @","")
+                _nametarget = _name.rstrip('  ')
+                gs = cl.getGroup(msg.to)
+                targets = []
+                for g in gs.members:
+                    if _nametarget == g.displayName:
+                        targets.append(g.mid)
+                if targets == []:
+                    cl.sendText(msg.to,"Contact not found")
+                else:
+                    for target in targets:
+                        try:
+                            contact = cl.getContact(target)
+                            cu = cl.channel.getCover(target)
+                            path = str(cu)
+                            cl.sendImageWithURL(msg.to, path)
+                        except:
+                            pass
 #--------------------------------------------------------
             elif "Mid: " in msg.text:
                 mmid = msg.text.replace("Mid: ","")
